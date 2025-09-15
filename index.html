@@ -25,8 +25,6 @@
             box-sizing: border-box;
         }
 
-        
-
         body {
             font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
             background-color: var(--bg-color);
@@ -39,12 +37,12 @@
         }
         
         @keyframes moveGradient {
-          0% { background-position: 0% 0%; }
-          50% { background-position: 100% 100%; }
-          100% { background-position: 0% 0%; }
+            0% { background-position: 0% 0%; }
+            50% { background-position: 100% 100%; }
+            100% { background-position: 0% 0%; }
         }
 
-        /* --- NEW: High-Performance Cursor Styles --- */
+        /* --- Custom Cursor Styles --- */
         .cursor {
             display: none; 
         }
@@ -61,13 +59,14 @@
                 pointer-events: none;
                 z-index: 9999;
                 mix-blend-mode: difference;
+                transition: opacity 0.3s ease; /* Added for smooth appearance */
             }
             .cursor-dot {
                 width: 10px;
                 height: 10px;
                 background-color: white;
                 border-radius: 50%;
-                transition: transform 0.3s ease;
+                transition: transform 0.3s ease, background-color 0.3s ease, border 0.3s ease; /* Combined transitions */
             }
             .cursor.active .cursor-dot {
                 transform: scale(3);
@@ -441,12 +440,12 @@
                 <h2>About Me</h2>
                 <p class="animate-on-scroll">
                     A passionate developer with experience in machine learning and front-end development. I’ve worked on real-world ML projects focused on healthcare, gaining strong skills in building reliable and scalable AI-driven systems.
-
-On the front-end, I specialize in creating clean, user-friendly applications using modern frameworks. I have a strong interest in UI/UX design, aiming to build interfaces that are both functional and visually appealing.
-
-During my internship at Biosoft Health Tech, I worked with enterprise-level technologies, contributing to backend systems, API integration, and database management, while also designing responsive web and mobile interfaces.
-
-Beyond tech, I’m inspired by gaming, design, and creativity, and enjoy turning innovative ideas into polished digital experiences.
+                    <br><br>
+                    On the front-end, I specialize in creating clean, user-friendly applications using modern frameworks. I have a strong interest in UI/UX design, aiming to build interfaces that are both functional and visually appealing.
+                    <br><br>
+                    During my internship at Biosoft Health Tech, I worked with enterprise-level technologies, contributing to backend systems, API integration, and database management, while also designing responsive web and mobile interfaces.
+                    <br><br>
+                    Beyond tech, I’m inspired by gaming, design, and creativity, and enjoy turning innovative ideas into polished digital experiences.
                 </p>
                 <div class="about-buttons animate-on-scroll">
                     <a href="https://drive.google.com/file/d/1feuTIP9yYYFKivEfODSRPnkInkGGay18/view?usp=drive_link" target="_blank" class="btn">
@@ -508,113 +507,4 @@ Beyond tech, I’m inspired by gaming, design, and creativity, and enjoy turning
                             <span>Connect on LinkedIn</span>
                         </a>
                         <a href="https://github.com/gladiatorr22" target="_blank" class="btn">
-                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
-                            <span>Follow on GitHub</span>
-                        </a>
-                    </div>
-                </div>
-            </div>
-        </section>
-    </main>
-
-    <footer>
-        <div class="container">
-            <p>&copy; 2025 Likithraj N</p>
-        </div>
-    </footer>
-
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-
-            // --- Performance Optimization: Cache frequently accessed elements ---
-            const header = document.getElementById('main-header');
-            const animatedElements = document.querySelectorAll('.animate-on-scroll');
-            const interactiveElements = document.querySelectorAll('a, button, .btn');
-            const navLinks = document.querySelectorAll('#main-nav a, .logo');
-            const mobileNavToggle = document.querySelector('.mobile-nav-toggle');
-            const mainNav = document.getElementById('main-nav');
-
-            // --- Mobile Navigation ---
-            mobileNavToggle.addEventListener('click', () => {
-                document.body.classList.toggle('nav-open');
-            });
-
-            // --- Sticky Header ---
-            window.addEventListener('scroll', () => {
-                if (window.scrollY > 50) {
-                    header.classList.add('scrolled');
-                } else {
-                    header.classList.remove('scrolled');
-                }
-            });
-
-            // --- Animate on Scroll ---
-            const observer = new IntersectionObserver((entries) => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        entry.target.classList.add('visible');
-                    }
-                });
-            }, {
-                threshold: 0.1
-            });
-            animatedElements.forEach(el => observer.observe(el));
-
-            // --- NEW: High-Performance Cursor (PC Only) ---
-            const isTouchDevice = window.matchMedia("(pointer: coarse)").matches;
-            if (!isTouchDevice) {
-                const cursor = document.querySelector('.cursor');
-
-                window.addEventListener('mousemove', e => {
-                    // Directly set position for instant response
-                    cursor.style.transform = `translate(${e.clientX}px, ${e.clientY}px)`;
-                });
-                
-                interactiveElements.forEach(el => {
-                    el.addEventListener('mouseenter', () => cursor.classList.add('active'));
-                    el.addEventListener('mouseleave', () => cursor.classList.remove('active'));
-                });
-            }
-
-            // --- 60fps Smooth Scrolling ---
-            navLinks.forEach(link => {
-                link.addEventListener('click', function(e) {
-                    e.preventDefault();
-                    
-                    if (document.body.classList.contains('nav-open')) {
-                        document.body.classList.remove('nav-open');
-                    }
-
-                    const targetId = this.getAttribute('href');
-                    const targetElement = targetId === '#' ? document.body : document.querySelector(targetId);
-                    
-                    if (targetElement) {
-                        const targetPosition = targetElement.getBoundingClientRect().top + window.pageYOffset;
-                        const startPosition = window.pageYOffset;
-                        const distance = targetPosition - startPosition;
-                        const duration = 1200;
-                        let startTime = null;
-
-                        function animation(currentTime) {
-                            if (startTime === null) startTime = currentTime;
-                            const timeElapsed = currentTime - startTime;
-                            const run = ease(timeElapsed, startPosition, distance, duration);
-                            window.scrollTo(0, run);
-                            if (timeElapsed < duration) requestAnimationFrame(animation);
-                        }
-
-                        function ease(t, b, c, d) {
-                            t /= d / 2;
-                            if (t < 1) return c / 2 * t * t + b;
-                            t--;
-                            return -c / 2 * (t * (t - 2) - 1) + b;
-                        }
-
-                        requestAnimationFrame(animation);
-                    }
-                });
-            });
-        });
-    </script>
-</body>
-</html>
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1
